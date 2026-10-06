@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Spice Garden - Menu</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f4ef;
+            color: #292929;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.65),
+                    rgba(0, 0, 0, 0.65)
+                ),
+                linear-gradient(135deg, #7a1f1f, #d97706);
+
+            color: white;
+            text-align: center;
+            padding: 45px 20px 40px;
+        }
+
+        .restaurant-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 15px;
+            opacity: 0.9;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 18px;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 13px;
+        }
+
+        /* =========================
+           CATEGORY NAVIGATION
+        ========================== */
+
+        .categories {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+
+            background: white;
+            padding: 14px 10px;
+
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .categories a {
+            text-decoration: none;
+            color: #555;
+
+            background: #f3f3f3;
+
+            padding: 9px 16px;
+
+            border-radius: 25px;
+
+            white-space: nowrap;
+
+            font-size: 13px;
+        }
+
+        .categories a.active {
+            background: #9f1239;
+            color: white;
+        }
+
+        /* =========================
+           MAIN CONTENT
+        ========================== */
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 25px 15px 50px;
+        }
+
+        .section-title {
+            margin: 25px 0 15px;
+        }
+
+        .section-title h2 {
+            font-size: 23px;
+            color: #7f1d1d;
+        }
+
+        .section-title p {
+            color: #888;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        /* =========================
+           FOOD CARD
+        ========================== */
+
+        .food-card {
+            background: white;
+
+            border-radius: 16px;
+
+            margin-bottom: 14px;
+
+            padding: 14px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+
+            box-shadow:
+                0 3px 12px rgba(0,0,0,0.06);
+
+            transition: 0.2s;
+        }
+
+        .food-card:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 6px 18px rgba(0,0,0,0.10);
+        }
+
+        /* Food image placeholder */
+
+        .food-image {
+            width: 90px;
+            height: 90px;
+
+            flex-shrink: 0;
+
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 43px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff7ed,
+                    #fed7aa
+                );
+        }
+
+        .food-details {
+            flex: 1;
+        }
+
+        .food-name {
+            font-size: 17px;
+            font-weight: bold;
+
+            margin-bottom: 5px;
+        }
+
+        .food-description {
+            font-size: 13px;
+            color: #777;
+
+            line-height: 1.4;
+
+            margin-bottom: 9px;
+        }
+
+        .food-price {
+            font-size: 17px;
+            font-weight: bold;
+
+            color: #991b1b;
+        }
+
+        .veg {
+            display: inline-block;
+
+            border: 1px solid #16a34a;
+
+            color: #16a34a;
+
+            font-size: 9px;
+
+            padding: 2px 4px;
+
+            margin-left: 5px;
+
+            border-radius: 3px;
+        }
+
+        .nonveg {
+            display: inline-block;
+
+            border: 1px solid #dc2626;
+
+            color: #dc2626;
+
+            font-size: 9px;
+
+            padding: 2px 4px;
+
+            margin-left: 5px;
+
+            border-radius: 3px;
+        }
+
+        /* =========================
+           ORDER BUTTON
+        ========================== */
+
+        .order-box {
+            background: #7f1d1d;
+
+            color: white;
+
+            padding: 22px;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            margin-top: 35px;
+        }
+
+        .order-box h3 {
+            margin-bottom: 8px;
+        }
+
+        .order-box p {
+            font-size: 13px;
+            opacity: 0.9;
+
+            margin-bottom: 15px;
+        }
+
+        .order-button {
+            display: inline-block;
+
+            background: white;
+
+            color: #7f1d1d;
+
+            text-decoration: none;
+
+            padding: 11px 22px;
+
+            border-radius: 25px;
+
+            font-weight: bold;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            text-align: center;
+
+            padding: 25px;
+
+            color: #888;
+
+            font-size: 12px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 500px) {
+
+            .hero {
+                padding: 35px 15px;
+            }
+
+            .hero h1 {
+                font-size: 29px;
+            }
+
+            .food-card {
+                padding: 11px;
+            }
+
+            .food-image {
+                width: 75px;
+                height: 75px;
+                font-size: 35px;
+            }
+
+            .food-name {
+                font-size: 15px;
+            }
+
+            .food-description {
+                font-size: 12px;
+            }
+
+            .food-price {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- HERO -->
+
+    <header class="hero">
+
+        <div class="restaurant-icon">
+            🍽️
+        </div>
+
+        <h1>Spice Garden</h1>
+
+        <p>Authentic South Indian & Multi-Cuisine Restaurant</p>
+
+        <div class="status">
+            🟢 Open Today • 11:00 AM - 11:00 PM
+        </div>
+
+    </header>
+
+
+    <!-- CATEGORY MENU -->
+
+    <nav class="categories">
+
+        <a href="#biryani" class="active">
+            🍛 Biryani
+        </a>
+
+        <a href="#starters">
+            🍗 Starters
+        </a>
+
+        <a href="#rice">
+            🍚 Rice
+        </a>
+
+        <a href="#drinks">
+            🥤 Drinks
+        </a>
+
+    </nav>
+
+
+    <!-- MENU -->
+
+    <main class="container">
+
+
+        <!-- BIRYANI -->
+
+        <div class="section-title" id="biryani">
+
+            <h2>🍛 Biryani</h2>
+
+            <p>Our signature biryanis</p>
+
+        </div>
+
+
+        <div class="food-card">
+
+            <div class="food-image">
+                🍗
+            </div>
+
+            <div class="food-details">
+
+                <div class="food-name">
+                    Chicken Biryani
+                    <span class="nonveg">NON-VEG</span>
+                </div>
+
+                <div class="food-description">
+                    Fragrant basmati rice cooked with tender chicken,
+                    aromatic spices and herbs.
+                </div>
+
+                <div class="food-price">
+                    ₹150
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="food-card">
+
+            <div class="food-image">
+                🍖
+            </div>
+
+            <div class="food-details">
+
+                <div class="food-name">
+                    Mutton Biryani
+                    <span class="nonveg">NON-VEG</span>
+                </div>
+
+                <div class="food-description">
+                    Rich and flavorful biryani prepared with
+                    tender mutton and traditional spices.
+                </div>
+
+                <div class="food-price">
+                    ₹220
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STARTERS -->
+
+        <div class="section-title" id="starters">
+
+            <h2>🍗 Starters</h2>
+
+            <p>Crispy, spicy and delicious</p>
+
+        </div>
+
+
+        <div class="food-card">
+
+            <div class="food-image">
+                🍗
+            </div>
+
+            <div class="food-details">
+
+                <div class="food-name">
+                    Chicken 65
+                    <span class="nonveg">NON-VEG</span>
+                </div>
+
+                <div class="food-description">
+                    Crispy fried chicken tossed with spicy
+                    South Indian seasoning.
+                </div>
+
+                <div class="food-price">
+                    ₹120
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="food-card">
+
+            <div class="food-image">
+                🥦
+            </div>
+
+            <div class="food-details">
+
+                <div class="food-name">
+                    Gobi 65
+                    <span class="veg">VEG</span>
+                </div>
+
+                <div class="food-description">
+                    Crispy cauliflower tossed in our
+                    signature spicy masala.
+                </div>
+
+                <div class="food-price">
+                    ₹90
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RICE -->
+
+        <div class="section-title" id="rice">
+
+            <h2>🍚 Rice & Noodles</h2>
+
+            <p>Perfect for a quick meal</p>
+
+        </div>
+
+
+        <div class="food-card">
+
+            <div class="food-image">
+                🍚
+            </div>
+
+            <div class="food-details">
+
+                <div class="food-name">
+                    Veg Fried Rice
+                    <span class="veg">VEG</span>
+                </div>
+
+                <div class="food-description">
+                    Chinese-style fried rice with fresh
+                    vegetables and aromatic seasoning.
+                </div>
+
+                <div class="food-price">
+                    ₹100
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="food-card">
+
+            <div class="food-image">
+                🍜
+            </div>
+
+            <div class="food-details">
+
+                <div class="food-name">
+                    Chicken Noodles
+                    <span class="nonveg">NON-VEG</span>
+                </div>
+
+                <div class="food-description">
+                    Stir-fried noodles with chicken,
+                    vegetables and special sauce.
+                </div>
+
+                <div class="food-price">
+                    ₹130
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DRINKS -->
+
+        <div class="section-title" id="drinks">
+
+            <h2>🥤 Drinks</h2>
+
+            <p>Fresh & refreshing</p>
+
+        </div>
+
+
+        <div class="food-card">
+
+            <div class="food-image">
+                🍋
+            </div>
+
+            <div class="food-details">
+
+                <div class="food-name">
+                    Fresh Lime Juice
+                </div>
+
+                <div class="food-description">
+                    Refreshing fresh lime juice.
+                </div>
+
+                <div class="food-price">
+                    ₹40
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="food-card">
+
+            <div class="food-image">
+                🥭
+            </div>
+
+            <div class="food-details">
+
+                <div class="food-name">
+                    Fresh Mango Juice
+                </div>
+
+                <div class="food-description">
+                    Fresh seasonal mango juice.
+                </div>
+
+                <div class="food-price">
+                    ₹60
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ORDER -->
+
+        <div class="order-box">
+
+            <h3>📱 Want to Order?</h3>
+
+            <p>
+                Scan the QR code or contact us directly
+                to place your order.
+            </p>
+
+            <a href="#" class="order-button">
+                Order on WhatsApp
+            </a>
+
+        </div>
+
+
+    </main>
+
+
+    <footer>
+
+        © 2026 Spice Garden • Thank you for visiting ❤️
+
+    </footer>
+
+
+</body>
+</html>
